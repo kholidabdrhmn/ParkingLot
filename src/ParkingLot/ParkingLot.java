@@ -20,6 +20,7 @@ public class ParkingLot {
 				//System.out.println(lot.length);
 				System.out.println("Created a parking lot with " + slot + " slots");
 			} else if (input[0].equalsIgnoreCase("park")) {
+				int bc = 0;
 				for (int i = 0; i < lot.length; i++) {
 					
 					if (lot[i] == null) {
@@ -30,8 +31,12 @@ public class ParkingLot {
 						//System.out.println(mobil.nomor);
 						lot[i] = mobil;
 						System.out.println("Allocated slot number: " + mobil.slotNo);
+						bc++;
 						break;
 					}
+				}
+				if (bc == 0) {
+					System.out.println("Sorry, parking lot is full");
 				}
 //				for (int j = 0; j < lot.length; j++) {
 //					if (lot[j] == null) {
@@ -90,9 +95,27 @@ public class ParkingLot {
 					System.out.println("Not found");
 				}
 			} else if (input[0].equalsIgnoreCase("slot_number_for_registration_number")) {
-
+				String nomor = input[1];
+				ArrayList<Integer> wrn = new ArrayList<>();
+				int ab = 0;
+				for (int i = 0; i<lot.length; i++) {
+					if(lot[i].nomor.equalsIgnoreCase(nomor)) {
+						wrn.add(lot[i].slotNo);
+						ab++;
+					}
+				}
+				for (int j = 0; j < wrn.size();j++) {
+					if (j < wrn.size()-1) {
+						System.out.print(wrn.get(j)+", ");
+					}else {
+						System.out.println(wrn.get(j));
+					}
+				}
+				if (ab == 0) {
+					System.out.println("Not found");
+				}
 			} else if (input[0].equalsIgnoreCase("status")) {
-				System.out.format("%10s%35s%15s", "No. ", "Registration Slot No.", "Colour");
+				System.out.format("%10s%35s%15s", "Slot No.", "Registration No", "Colour");
 				System.out.println();
 				for (int i = 0; i < lot.length; i++) {
 					if (lot[i]!= null) {
